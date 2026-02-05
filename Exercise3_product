@@ -1,0 +1,160 @@
+/**
+ * Write a description of class Product here.
+ *
+ * @author (Group 10)
+ * @version (05/02/2026)
+ */
+public class Product {
+
+    private String productCode;
+    private String productName;
+    private String category;
+    private double unitPrice;
+    private int quantityInStock;
+    private int reorderLevel;
+
+    public Product() {
+        this.productCode = "Unknown";
+        this.productName = "Unknown";
+        this.category = "Unknown";
+        this.unitPrice = 0;
+        this.quantityInStock = 0;
+        this.reorderLevel = 10;
+    }
+
+    public Product(String productCode, String productName, String category,
+                   double unitPrice, int quantityInStock) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.category = category;
+        this.unitPrice = unitPrice;
+        this.quantityInStock = quantityInStock;
+        this.reorderLevel = 10;
+    }
+
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public int getQuantityInStock() {
+        return quantityInStock;
+    }
+
+    public int getReorderLevel() {
+        return reorderLevel;
+    }
+
+     public void setUnitPrice(double unitPrice) {
+        if (unitPrice > 0) {
+            this.unitPrice = unitPrice;
+        } else {
+            System.out.println("Invalid unit price.");
+        }
+    }
+
+    public void setQuantityInStock(int quantityInStock) {
+        if (quantityInStock >= 0) {
+            this.quantityInStock = quantityInStock;
+        } else {
+            System.out.println("Quantity cannot be negative.");
+        }
+    }
+
+    public void setReorderLevel(int reorderLevel) {
+        if (reorderLevel > 0) {
+            this.reorderLevel = reorderLevel;
+        } else {
+            System.out.println("Reorder level must be greater than zero.");
+        }
+    }
+
+    public void addStock(int quantity) {
+        if (quantity > 0) {
+            quantityInStock += quantity;
+        } else {
+            System.out.println("Invalid stock quantity.");
+        }
+    }
+
+    public boolean sellProduct(int quantity) {
+        if (quantity > 0 && quantity <= quantityInStock) {
+            quantityInStock -= quantity;
+            return true;
+        }
+        return false;
+    }
+
+     public double calculateStockValue() {
+        return unitPrice * quantityInStock;
+    }
+
+     public boolean needsReorder() {
+        return quantityInStock <= reorderLevel;
+    }
+
+
+    public void applyDiscount(double percentage) {
+        if (percentage > 0 && percentage <= 100) {
+            unitPrice -= unitPrice * (percentage / 100);
+        } else {
+            System.out.println("Invalid discount percentage.");
+        }
+    }
+
+
+    public void displayProductInfo() {
+        System.out.println("Code: " + productCode);
+        System.out.println("Name: " + productName);
+        System.out.println("Category: " + category);
+        System.out.println("Unit Price: " + unitPrice);
+        System.out.println("Quantity in Stock: " + quantityInStock);
+        System.out.println("Reorder Level: " + reorderLevel);
+        System.out.println("Stock Value: " + calculateStockValue());
+        System.out.println("Needs Reorder: " + (needsReorder() ? "YES" : "NO"));
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("=== Product Inventory Exercise ===\n");
+
+        Product p1 = new Product("PRD001", "Laptop", "Electronics", 1500000, 25);
+
+        Product p2 = new Product("PRD002", "Office Chair", "Furniture", 350000, 8);
+
+        Product p3 = new Product("PRD003", "Notebook", "Stationery", 2000, 100);
+
+        p1.displayProductInfo();
+        p2.displayProductInfo();
+        p3.displayProductInfo();
+        p1.sellProduct(20);
+
+        if (p2.needsReorder()) {
+            System.out.println(p2.getProductName() + " needs to be reordered.");
+        } 
+        else {
+            System.out.println(p2.getProductName() + " does not need to be reordered.");
+        }
+
+        p1.sellProduct(3);
+        p3.applyDiscount(15);
+        
+        p1.displayProductInfo();
+        p2.displayProductInfo();
+        p3.displayProductInfo();
+
+        System.out.println("\n=== Exercise Complete ===");
+    }
+}
