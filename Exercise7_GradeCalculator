@@ -1,0 +1,59 @@
+/**
+ * Write a description of class Grade Calculator here.
+ *
+ * @author (Group 10)
+ * @version (05/02/2026)
+ */
+
+
+import java.util.Scanner;
+public class GradeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Grade Calculator ===\n");
+
+        System.out.print("Enter your exam score (0-100): ");
+        int score = scanner.nextInt();
+
+        if (score < 0 || score > 100) {
+            System.out.println("Error: Score must be between 0 and 100!");
+        } else {
+            char grade;
+            String description;
+
+            if (score >= 90) {
+                grade = 'A';
+                description = "Excellent";
+            } else if (score >= 80) {
+                grade = 'B';
+                description = "Very Good";
+            } else if (score >= 70) {
+                grade = 'C';
+                description = "Good";
+            } else if (score >= 60) {
+                grade = 'D';
+                description = "Satisfactory";
+            } else if (score >= 50) {
+                grade = 'E';
+                description = "Pass";
+            } else {
+                grade = 'F';
+                description = "Fail";
+            }
+
+            System.out.println("\n--- Results ---");
+            System.out.println("Score: " + score);
+            System.out.println("Grade: " + grade + " (" + description + ")");
+
+            if (score >= 50) {
+                System.out.println("Status: PASSED! Congratulations!");
+            } else {
+                System.out.println("Status: FAILED. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
+
