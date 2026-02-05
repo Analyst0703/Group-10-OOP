@@ -1,13 +1,12 @@
 
 /**
- *Student Name: Suleiman Abdalla Baho.
- *Reg No: 24BIA002 
+ *GROUP NUMBER: 10
  *Course: PT821 - Object-Oriented Programming
- *Exercise Tittle: Inheritance (Vehicle Hierarchy)
+ *Exercise Title: Inheritance (Vehicle Hierarchy)
  *Lecture: Massoud Hamad
  *Date: 22 January 2026
  *Description: This program demonstrates the concept of inheritance method 
- *             overriding and polymorphism in Java using a vehicle hierarchy.
+ *             Overriding Java using a vehicle hierarchy.
  */
 class Vehicle
 {
