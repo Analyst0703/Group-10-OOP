@@ -1,0 +1,176 @@
+
+/**
+ *Student Name: Suleiman Abdalla Baho.
+ *Reg No: 24BIA002 
+ *Course: PT821 - Object-Oriented Programming
+ *Exercise Tittle: Inheritance (Vehicle Hierarchy)
+ *Lecture: Massoud Hamad
+ *Date: 22 January 2026
+ *Description: This program demonstrates the concept of inheritance method 
+ *             overriding and polymorphism in Java using a vehicle hierarchy.
+ */
+class Vehicle
+{
+    protected String brand;
+    protected String model;
+    protected int year;
+    protected double price;
+
+    public Vehicle(String brand, String model, int year, double price) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.price = price;
+    }
+
+    public void displayInfo() {
+        System.out.println("=== Vehicle Information ===");
+        System.out.println("Brand: " + brand);
+        System.out.println("Model: " + model);
+        System.out.println("Year: " + year);
+        System.out.printf("Price: TZS %, .2f%n", price);
+    }
+
+    public void startEngine() {
+        System.out.println(brand + " " + model + " engine started");
+    }
+
+    public void stopEngine() {
+        System.out.println(brand + " " + model + " engine stopped");
+    }
+}
+
+// Car class
+class Car extends Vehicle {
+    private int numDoors;
+    private String fuelType;
+
+    public Car(String brand, String model, int year, double price,
+               int numDoors, String fuelType) {
+        super(brand, model, year, price);
+        this.numDoors = numDoors;
+        this.fuelType = fuelType;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Doors: " + numDoors);
+        System.out.println("Fuel Type: " + fuelType);
+    }
+
+    public void honk() {
+        System.out.println(brand + " " + model + " says: Beep! Beep!");
+    }
+
+    public void openTrunk() {
+        System.out.println("Opening trunk of " + brand + " " + model);
+    }
+}
+
+//Motorcycle class
+
+class Motorcycle extends Vehicle {
+    private int engineCC;
+    private boolean hasHelmetStorage;
+
+    public Motorcycle(String brand, String model, int year, double price,
+                      int engineCC, boolean hasHelmetStorage) {
+        super(brand, model, year, price);
+        this.engineCC = engineCC;
+        this.hasHelmetStorage = hasHelmetStorage;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Engine: " + engineCC + "cc");
+        System.out.println("Helmet Storage: " + (hasHelmetStorage ? "Yes" : "No"));
+    }
+
+    public void wheelie() {
+        System.out.println(brand + " " + model + " is doing a wheelie!");
+    }
+
+    public void kickStart() {
+        System.out.println("Kick starting " + brand + " " + model);
+    }
+}
+
+//ElectricCar class
+  
+class ElectricCar extends Car {
+    private double batteryCapacity;
+    private int range;
+
+    public ElectricCar(String brand, String model, int year, double price,
+                       int numDoors, String fuelType,
+                       double batteryCapacity, int range) {
+        super(brand, model, year, price, numDoors, fuelType);
+        this.batteryCapacity = batteryCapacity;
+        this.range = range;
+    }
+
+    @Override
+    public void startEngine() {
+        System.out.println(brand + " " + model + " electric motor activated silently");
+    }
+
+    public void charge() {
+        System.out.println("Charging " + brand + " " + model +
+                "... Battery: " + batteryCapacity + " kWh");
+    }
+
+    public void displayBatteryStatus() {
+        System.out.println("Battery Capacity: " + batteryCapacity + " kWh");
+        System.out.println("Range: " + range + " km");
+    }
+}
+
+//Main class
+ 
+public class Inheritance_Exercise {
+    public static void main(String[] args) {
+
+        System.out.println("=== VEHICLE HIERARCHY TEST ===\n");
+        Car car = new Car("Toyota", "Land Cruiser", 2022, 180000000, 7, "Diesel");
+
+        Motorcycle motorcycle = new Motorcycle("Suzuki", "GSX-R600", 2021, 16000000, 599, true);
+
+        ElectricCar electricCar = new ElectricCar("Range Rover", "Velar EV", 2024, 210000000, 5, "Electric", 90.0, 470);
+       
+
+        System.out.println("--- Testing Car ---");
+        car.displayInfo();
+        car.startEngine();
+        car.honk();
+        car.openTrunk();
+        car.stopEngine();
+
+        System.out.println("\n--- Testing Motorcycle ---");
+        motorcycle.displayInfo();
+        motorcycle.startEngine();
+        motorcycle.wheelie();
+        motorcycle.kickStart();
+        motorcycle.stopEngine();
+
+        System.out.println("\n--- Testing Electric Car ---");
+        electricCar.displayInfo();
+        electricCar.startEngine();
+        electricCar.charge();
+        electricCar.displayBatteryStatus();
+        electricCar.honk();
+        electricCar.stopEngine();
+
+        System.out.println("\n--- Polymorphism Demo ---");
+        Vehicle[] vehicles = {car, motorcycle, electricCar};
+        for (Vehicle v : vehicles) {
+            v.displayInfo();
+            v.startEngine();
+            System.out.println();
+        }
+
+        System.out.println("=== END OF TEST ===");
+    }
+}
+
